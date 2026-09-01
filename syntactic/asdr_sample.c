@@ -4,9 +4,12 @@
 #include <stdlib.h>
 
 bool debug = false;
+int pline = 0;
 
+extern int yylineno;
 extern int yylex(void);
 extern char *yytext;
+extern 
 
 void setDebug(bool _debug)
 {
@@ -46,10 +49,15 @@ static const char *tokenName(int token)
     }
 }
  
-#define DEBUG_PRINT_TOKEN(t) \
-    do { if (debug) printf("%s\n", tokenName(t)); } while (0)
-
-
+#define DEBUG_PRINT_TOKEN(t)                    \
+    do {                                        \
+        if (debug) {                            \
+            if (yylineno != pline)              \
+                printf("\n");                   \
+            printf("%s ", tokenName(t));        \
+            pline = yylineno;                   \
+        }                                       \
+    } while (0)
 /*
   Prog -->  ListaDecl
 
@@ -125,9 +133,11 @@ static void F(void);
 static void check(int token)
 {
     if (laToken == token) {
-        DEBUG_PRINT_TOKEN(token);
         if(laToken != TEOF)
+        {
+            DEBUG_PRINT_TOKEN(token);
             laToken = yylex();
+        }
     }
     else
     {

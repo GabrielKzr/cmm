@@ -5,7 +5,10 @@
 extern void setDebug(bool debug);
 %}
 
+%option noinput
+%option nounput
 %option noyywrap
+%option yylineno
 %option yylineno
 
 WHITE_SPACE_CHAR [\n\r\ \t\b]
