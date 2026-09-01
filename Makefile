@@ -1,7 +1,8 @@
 CC = gcc
 FLEX = flex
 
-CFLAGS = -Wall -Wextra -std=c11 -D_POSIX_C_SOURCE=200809L
+CFLAGS = -Wall -Wextra -std=c11 
+CFLAGS_LEXER = -D_POSIX_C_SOURCE=200809L
 
 INCLUDES = -I syntactic
 
@@ -16,8 +17,6 @@ LEXER_O = $(BUILD)/lex.yy.o
 SOURCES = \
 	main.c \
 	syntactic/asdr_sample.c \
-	#lexer/lexer.c \
-	#lists/list.c 
 
 # test
 TEST = tests/main2.cmm
@@ -30,7 +29,7 @@ $(LEXER_C): $(LEXER)
 	$(FLEX) -o $@ $<
 
 $(LEXER_O): $(LEXER_C)
-	$(CC) $(CFLAGS) $(INCLUDES) -Wno-sign-compare -c $< -o $@
+	$(CC) $(CFLAGS_LEXER) $(INCLUDES) -Wno-sign-compare -c $< -o $@
 
 $(TARGET): $(LEXER_O) $(SOURCES)
 	mkdir -p $(BUILD)

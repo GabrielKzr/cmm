@@ -3,14 +3,14 @@ $TRACE_ON
 int x, y, z;
 double media;
 
-func int soma(int a, int b) {
+int soma(int a, int b) {
     int resultado;
 
     resultado = a + b;
     x = resultado;
 }
 
-func void processa(int n) {
+void processa(int n) {
     int i;
     int total;
 

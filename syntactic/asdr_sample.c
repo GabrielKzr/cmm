@@ -58,67 +58,17 @@ static const char *tokenName(int token)
             pline = yylineno;                   \
         }                                       \
     } while (0)
-/*
-  Prog -->  ListaDecl
-
-  ListaDecl -->  DeclVar  ListaDecl
-              |  DeclFun  ListaDecl
-              |  // vazio
-
-  DeclVar --> Tipo ListaIdent ';' DeclVar
-            | // vazio
-
-  Tipo --> int | double | boolean
-
-  ListaIdent --> IDENT , ListaIdent  
-               | IDENT      
-
-  DeclFun --> FUNC tipoOuVoid IDENT '(' FormalPar ')' '{' DeclVar ListaCmd '}' DeclFun
-            | // vazio
-
-  TipoOuVoid --> Tipo | VOID
-
-  // Formal par é inútil, a análise pode ser feita sem ele e ir direto pra paramlist e tratar da mesma forma que lista Ident
-  // caso contrário, é necessário analisar (vazio) que não significa nada
-  FormalPar -> paramList  
-            | // vazio
-
-  paramList --> Tipo IDENT , ParamList
-              | Tipo IDENT 
-
-  Bloco --> { ListaCmd }
-
-  ListaCmd --> Cmd ListaCmd
-    |    // vazio
-
-  Cmd --> Bloco
-      | while ( E ) Cmd
-      | IDENT = E ;
-      | if ( E ) Cmd RestoIf
-
-  RestoIf -> else Cmd
-        |    // vazio
-  E --> E + T
-      | E - T
-      | T
-
-  T --> T * F
-      | T / F
-      | F    
-      
-  F -->  IDENT
-      | NUM
-      | ( E )
-*/
 
 static int laToken;
 
+static void listaDecl(void);
+static void restoDecl(void);
+
 static void check(int token);
 static void declVar(void);
+static void restoFunc(void);
 static void listaIdent(void);
 
-static void declFunc(void);
-static void tipoOuVoid(void);
 static void paramList(void);
 
 static void listaCmd(void);
@@ -183,22 +133,6 @@ static void declVar(void)
     }
 }
 
-static void tipoOuVoid(void)
-{
-    if(laToken == TYPE)
-    {
-        check(TYPE);
-    }
-    else if(laToken == VOID)
-    {
-        check(VOID);
-    }
-    else
-    {
-        yyerror("Error: expected TYPE or VOID, but got %d\n", laToken);
-    }
-}
-
 static void paramList(void)
 {
     check(TYPE);
@@ -240,7 +174,7 @@ static void F(void)
     }
     else
     {
-        yyerror("Error: unexpected token %d\n", laToken);
+        yyerror("Error: expected IDENT or NUM or '(' %d\n", laToken);
     }
 }
 
@@ -317,7 +251,7 @@ static void cmd(void)
     }
     else
     {
-        yyerror("Error: unexpected token %d\n", laToken);
+        yyerror("Error: expected '{' or WHILE or IDENT or IF at line %d\n", yylineno);
     }
 }
 
@@ -345,6 +279,7 @@ static void formalPar(void)
     }
 }
 
+/*
 static void declFunc(void)
 {   
     check(FUNC);
@@ -377,18 +312,63 @@ static void declFunc(void)
         (void)0; // everithing fine, do nothing, this is the case where there is no more function declarations
     }
 }
+*/
+
+static void restoFunc(void)
+{
+    check('(');
+    formalPar();
+    check(')');
+    check('{');
+    declVar();
+    listaCmd();
+    check('}');
+    listaDecl();
+}
+
+static void restoDecl(void)
+{
+    if(laToken == ';')
+    {
+        check(';');
+        listaDecl();
+    }
+    else if(laToken == ',')
+    {
+        check(',');
+        listaIdent();
+        check(';');
+        listaDecl();
+    }
+    else if(laToken == '(')
+    {
+        restoFunc();
+    }
+    else 
+    {
+        yyerror("Error: expected ';' or '(' at line %d\n", yylineno);
+    }
+}
 
 static void listaDecl(void)
 {
+    if(laToken == FUNC)
+    {
+        check(FUNC); // not used anymore, just legacy
+        printf("legacy ");
+    }
+
     if(laToken == TYPE)
     {
-        declVar();
-        listaDecl();
+        check(TYPE);
+        check(IDENT);
+        restoDecl();        
     }
-    else if(laToken == FUNC)
+    else if(laToken == VOID)
     {
-        declFunc();
-        listaDecl();
+        check(VOID);
+        check(IDENT);
+        restoFunc();
     }
     else if(laToken == TEOF)
     {
@@ -396,7 +376,7 @@ static void listaDecl(void)
     }
     else
     {
-        yyerror("Error: unexpected token %d\n", laToken);
+        yyerror("Error: expected TYPE or VOID or EOF at line", yylineno);
     }
 }
 
