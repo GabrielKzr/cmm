@@ -1,0 +1,28 @@
+func int main() {
+
+    int a, b, c;
+    (void)a; 
+
+    boolean x = true;
+    bool    y = 42;
+    double  d = 2.7;
+
+    c = 10; b = c;
+
+    while (b == 10) {
+        b = c + 1;
+    }
+
+    if(b) {
+        c = b * 10 + 2 / 3 * (4 + b);
+
+        if(c <= 20) {
+            return 2;
+        }
+    }
+    else {
+        return 1;
+    }
+
+    return 0;
+}
