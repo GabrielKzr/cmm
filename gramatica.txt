@@ -2,11 +2,13 @@
   Prog -->  ListaDecl
 
   ListaDecl -->  Tipo IDENT RestoDecl
-              |  VOID IDENT '(' FormalPar ')' '{' DeclVar ListaCmd '}' ListaDecl
+              |  VOID IDENT RestoFunc
 
   RestoDecl -->  ';' ListaDecl
               |  ',' ListaIdent ';'
-              |  '(' FormalPar ')' '{' DeclVar ListaCmd '}' ListaDecl
+              |  RestoFunc
+
+  RestoFunc -->  '(' FormalPar ')' '{' DeclVar ListaCmd '}' ListaDecl
 
   DeclVar --> Tipo ListaIdent ';' DeclVar
             | // vazio
