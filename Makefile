@@ -1,3 +1,6 @@
+# Makefile for the C-- example language syntactic analyzer
+# Author: Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+
 CC = gcc
 FLEX = flex
 
@@ -19,7 +22,7 @@ SOURCES = \
 	syntactic/asdr_sample.c \
 
 # test
-TEST = tests/main2.cmm
+TEST = tests/main.cmm
 
 all: $(TARGET)
 

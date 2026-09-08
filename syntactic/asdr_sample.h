@@ -1,4 +1,8 @@
-// asdr_sample.h
+/*
+ * @file    syntactic/asdr_sample.c
+ * @brief   This file contains the entry point for the recursive descent parser for the C-- example language.
+ * @author  Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+ */
 
 #ifndef ASDR_SAMPLE_H
 #define ASDR_SAMPLE_H
@@ -19,8 +23,6 @@ enum {
     // RETURN,
     // REL_OP,
 };
-
-// void syntatic_asdr(void *list, uint8_t (*pop)(void *, void *));
 
 void prog();
 

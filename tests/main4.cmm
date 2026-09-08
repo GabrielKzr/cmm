@@ -1,0 +1,100 @@
+$TRACE_ON
+
+int x, y, z;
+double a, b, resultado;
+boolean flag;
+
+int calcula(int n, double fator, boolean ativo) {
+    int i, temp;
+    double valor;
+
+    i = n;
+    temp = 10;
+    valor = fator * 2 + temp;
+
+    if (true) {
+        temp = temp + 1;
+        valor = valor * 2;
+    } else {
+        temp = temp - 1;
+    }
+
+    while (ativo) {
+        if (false) {
+            temp = temp * 2;
+        } else {
+            temp = temp + i;
+        }
+
+        i = i - 1;
+    }
+}
+
+void processa(int limite, boolean condicao) {
+    int contador;
+    double resultado;
+
+    contador = limite;
+    resultado = 10.5;
+
+    while (true) {
+        if (condicao) {
+            resultado = resultado + contador * 2.5;
+        } else {
+            resultado = resultado / 2.0;
+        }
+
+        contador = contador - 1;
+    }
+}
+
+double operacao(double x, double y, boolean flag) {
+    double resultado;
+    int i;
+
+    resultado = (x + y) * (x - y);
+
+    if (true) {
+        resultado = resultado / 2;
+    }
+
+    i = 10;
+
+    while (flag) {
+        if (false) {
+            resultado = resultado * x;
+        } else {
+            resultado = resultado + y;
+        }
+
+        i = i - 1;
+    }
+}
+
+void aninhado(boolean a, boolean b) {
+    int x;
+
+    x = 10;
+
+    if (a) {
+        while (b) {
+            if (true) {
+                x = x + 1;
+            } else {
+                x = x - 1;
+            }
+        }
+    } else {
+        while (false) {
+            x = x * 2;
+        }
+    }
+}
+
+void simples() {
+    int a, b, c;
+
+    a = 1;
+    b = 2;
+    c = (a + b) * (a - b) / 2;
+}

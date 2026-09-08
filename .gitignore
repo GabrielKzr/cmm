@@ -1,2 +1,5 @@
+# This is a .gitignore file for the C-- example language syntactic analyzer project.
+# Author: Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+
 build/
 save

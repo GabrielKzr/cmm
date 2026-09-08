@@ -1,4 +1,11 @@
 /*
+ * @file gramatica.txt
+ * @brief This file contains the gramaitc for the C-- example language
+ * @author Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+*/
+
+-> C-- Gramatic:
+
   Prog -->  ListaDecl
 
   ListaDecl -->  Tipo IDENT RestoDecl
@@ -50,4 +57,3 @@
   F -->  IDENT
       | NUM
       | ( E )
-*/

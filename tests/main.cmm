@@ -1,28 +1,33 @@
-func int main() {
+$TRACE_ON
 
-    int a, b, c;
-    (void)a; 
+int x, y, z;
+double media;
 
-    boolean x = true;
-    bool    y = 42;
-    double  d = 2.7;
+int soma(int a, int b) {
+    int resultado;
 
-    c = 10; b = c;
+    resultado = a + b;
+    x = resultado;
+}
 
-    while (b == 10) {
-        b = c + 1;
+void processa(int n) {
+    int i;
+    int total;
+
+    i = 1;
+    total = 0;
+
+    while (i) {
+        total = total + i;
+        i = i - 1;
     }
 
-    if(b) {
-        c = b * 10 + 2 / 3 * (4 + b);
-
-        if(c <= 20) {
-            return 2;
-        }
-    }
-    else {
-        return 1;
+    if (total) {
+        x = total * 2;
+    } else {
+        x = total / 2;
     }
 
-    return 0;
+    if (i)
+        y = i;
 }

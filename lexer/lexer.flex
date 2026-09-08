@@ -1,3 +1,11 @@
+/*
+ * @file    lexer/lexer.flex
+ * @brief   This file contains the implementation of a lexical analyzer for the C-- example language.
+ * @details It defines patterns for various tokens such as keywords, identifiers, numbers, and operators.
+ *          The lexer uses Flex to generate C code that recognizes these tokens and provides error handling for invalid characters.
+ * @author  Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+ */
+
 %{
 #include "asdr_sample.h"
 #include <stdbool.h>

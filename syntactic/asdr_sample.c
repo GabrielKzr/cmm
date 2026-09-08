@@ -1,3 +1,11 @@
+/*
+ * @file    syntactic/asdr_sample.c
+ * @brief   This file contains the implementation of a recursive descent parser for the C-- example language. 
+ * @details It defines functions to parse various constructs such as variable declarations, function definitions, and control flow statements.
+ *          The parser uses a lookahead token to determine the next action and provides error handling for unexpected tokens.
+ * @author  Gabriel Kaizer de Menezes & Nathan da Rosa Cidal
+ */
+
 #include "asdr_sample.h"
 #include <stdio.h>
 #include <stdarg.h>
@@ -91,7 +99,7 @@ static void check(int token)
     }
     else
     {
-        yyerror("Error: expected token %d, but got %d\n", token, laToken);
+        yyerror("Error: expected token %d, but got %d at line %d\n", token, laToken, yylineno);
     }
 }
 
@@ -279,41 +287,6 @@ static void formalPar(void)
     }
 }
 
-/*
-static void declFunc(void)
-{   
-    check(FUNC);
-
-    tipoOuVoid();
-
-    check(IDENT);
-    check('(');
-
-    formalPar();
-
-    check(')');
-    check('{');
-
-    if(laToken == TYPE)
-    {
-        declVar();
-    }
-
-    listaCmd();
-
-    check('}');
-
-    if(laToken == FUNC)
-    {
-        declFunc();
-    }
-    else
-    {
-        (void)0; // everithing fine, do nothing, this is the case where there is no more function declarations
-    }
-}
-*/
-
 static void restoFunc(void)
 {
     check('(');
@@ -376,7 +349,7 @@ static void listaDecl(void)
     }
     else
     {
-        yyerror("Error: expected TYPE or VOID or EOF at line", yylineno);
+        yyerror("Error: expected TYPE or VOID or EOF at line %d\n", yylineno);
     }
 }
 
