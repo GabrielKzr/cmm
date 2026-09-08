@@ -93,14 +93,6 @@ F --> IDENT
 
 > `ε` representa uma produção vazia.
 
-### Observações
-
-As declarações podem ocorrer no escopo global ou no início do corpo de uma função.
-
-Atribuições e estruturas de controle como `if` e `while` são comandos e, portanto, aparecem dentro dos corpos das funções ou de blocos aninhados.
-
-Os blocos `{ ... }` utilizados pelo programa são introduzidos pelo corpo de uma função ou pelas produções de `Bloco`.
-
 ## Analisador léxico
 
 O analisador léxico está localizado em:
